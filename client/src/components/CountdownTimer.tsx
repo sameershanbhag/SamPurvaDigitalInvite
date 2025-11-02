@@ -18,7 +18,7 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2024-12-21T18:00:00').getTime();
+    const targetDate = new Date('2025-12-25T18:00:00').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();

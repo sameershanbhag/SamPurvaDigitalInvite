@@ -9,32 +9,71 @@ interface EventDetail {
   title: string;
   primary: string;
   secondary: string;
+  link?: string;
+  onClick?: () => void;
 }
-
-const eventDetails: EventDetail[] = [
-  {
-    icon: Calendar,
-    title: 'Date',
-    primary: 'Saturday, December 21st, 2024',
-    secondary: 'Save the date',
-  },
-  {
-    icon: Clock,
-    title: 'Time',
-    primary: '6:00 PM Onwards',
-    secondary: 'Evening celebration',
-  },
-  {
-    icon: MapPin,
-    title: 'Venue',
-    primary: 'Grand Ballroom',
-    secondary: 'Royal Palace Hotel, Mumbai',
-  },
-];
 
 export default function EventDetails() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const generateCalendarEvent = () => {
+    const event = {
+      title: 'Sam & Purva Wedding Celebration',
+      description: 'Join us for our wedding celebration at Lavender Bough, Ghatkopar East, Mumbai',
+      location: 'Lavender Bough, Ghatkopar East, Mumbai',
+      startDate: '20251225T180000',
+      endDate: '20251225T230000',
+    };
+
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Wedding Invitation//EN',
+      'BEGIN:VEVENT',
+      `DTSTART:${event.startDate}`,
+      `DTEND:${event.endDate}`,
+      `SUMMARY:${event.title}`,
+      `DESCRIPTION:${event.description}`,
+      `LOCATION:${event.location}`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'sam-purva-wedding.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const eventDetails: EventDetail[] = [
+    {
+      icon: Calendar,
+      title: 'Date',
+      primary: 'Thursday, December 25th, 2025',
+      secondary: 'Save the date',
+      onClick: generateCalendarEvent,
+    },
+    {
+      icon: Clock,
+      title: 'Time',
+      primary: '6:00 PM Onwards',
+      secondary: 'Evening celebration',
+    },
+    {
+      icon: MapPin,
+      title: 'Venue',
+      primary: 'Lavender Bough',
+      secondary: 'Ghatkopar East, Mumbai',
+      link: 'https://share.google/oL1rExdXUDEAaZdCJ',
+    },
+  ];
 
   return (
     <section ref={ref} className="py-20 md:py-32 px-6 bg-card">
@@ -54,27 +93,56 @@ export default function EventDetails() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {eventDetails.map((detail, index) => {
             const Icon = detail.icon;
+            const CardContent = (
+              <>
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-serif text-2xl text-foreground mb-4">
+                  {detail.title}
+                </h3>
+                <p className="text-lg text-foreground font-medium mb-2">
+                  {detail.primary}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {detail.secondary}
+                </p>
+              </>
+            );
+
             return (
               <motion.div
                 key={detail.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="h-full"
               >
-                <Card className="p-8 text-center hover-elevate h-full">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Icon className="w-8 h-8 text-primary" />
+                {detail.link ? (
+                  <a
+                    href={detail.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
+                    <Card className="p-8 text-center hover-elevate h-full cursor-pointer transition-transform hover:scale-105">
+                      {CardContent}
+                    </Card>
+                  </a>
+                ) : detail.onClick ? (
+                  <div
+                    onClick={detail.onClick}
+                    className="block cursor-pointer h-full"
+                  >
+                    <Card className="p-8 text-center hover-elevate h-full transition-transform hover:scale-105">
+                      {CardContent}
+                    </Card>
                   </div>
-                  <h3 className="font-serif text-2xl text-foreground mb-4">
-                    {detail.title}
-                  </h3>
-                  <p className="text-lg text-foreground font-medium mb-2">
-                    {detail.primary}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {detail.secondary}
-                  </p>
-                </Card>
+                ) : (
+                  <Card className="p-8 text-center hover-elevate h-full">
+                    {CardContent}
+                  </Card>
+                )}
               </motion.div>
             );
           })}

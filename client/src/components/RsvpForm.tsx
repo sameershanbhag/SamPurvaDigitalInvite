@@ -20,11 +20,9 @@ export default function RsvpForm() {
   
   const [formData, setFormData] = useState({
     guestName: '',
-    email: '',
     phone: '',
     attending: 'yes',
     numberOfGuests: '1',
-    dietaryPreferences: [] as string[],
     message: '',
   });
 
@@ -45,26 +43,13 @@ export default function RsvpForm() {
     
     setFormData({
       guestName: '',
-      email: '',
       phone: '',
       attending: 'yes',
       numberOfGuests: '1',
-      dietaryPreferences: [],
       message: '',
     });
     
     setIsSubmitting(false);
-  };
-
-  const dietaryOptions = ['Vegetarian', 'Vegan', 'Jain', 'No Onion/Garlic', 'Gluten-Free'];
-
-  const toggleDietaryPreference = (option: string) => {
-    setFormData(prev => ({
-      ...prev,
-      dietaryPreferences: prev.dietaryPreferences.includes(option)
-        ? prev.dietaryPreferences.filter(p => p !== option)
-        : [...prev.dietaryPreferences, option]
-    }));
   };
 
   return (
@@ -128,18 +113,6 @@ export default function RsvpForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" data-testid="label-email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    data-testid="input-email"
-                  />
-                </div>
-
-                <div className="space-y-2">
                   <Label htmlFor="phone" data-testid="label-phone">Phone</Label>
                   <Input
                     id="phone"
@@ -159,13 +132,13 @@ export default function RsvpForm() {
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="yes" id="yes" data-testid="radio-attending-yes" />
                       <Label htmlFor="yes" className="cursor-pointer font-normal">
-                        Joyfully accepts
+                        Count me in! Can't wait to celebrate! ✨
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="no" id="no" data-testid="radio-attending-no" />
                       <Label htmlFor="no" className="cursor-pointer font-normal">
-                        Regretfully declines
+                        Sadly, I'll miss this one 💔
                       </Label>
                     </div>
                   </RadioGroup>
@@ -183,32 +156,13 @@ export default function RsvpForm() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {[1, 2, 3, 4, 5].map(num => (
+                          {[1, 2, 3, 4].map(num => (
                             <SelectItem key={num} value={num.toString()}>
                               {num} {num === 1 ? 'Guest' : 'Guests'}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                    </div>
-
-                    <div className="space-y-3">
-                      <Label data-testid="label-dietary">Dietary Preferences</Label>
-                      <div className="space-y-2">
-                        {dietaryOptions.map(option => (
-                          <div key={option} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={option}
-                              checked={formData.dietaryPreferences.includes(option)}
-                              onCheckedChange={() => toggleDietaryPreference(option)}
-                              data-testid={`checkbox-dietary-${option.toLowerCase().replace(/\s+/g, '-')}`}
-                            />
-                            <Label htmlFor={option} className="cursor-pointer font-normal">
-                              {option}
-                            </Label>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </>
                 )}
