@@ -1,37 +1,39 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type Rsvp, type InsertRsvp } from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getRsvp(id: string): Promise<Rsvp | undefined>;
+  getAllRsvps(): Promise<Rsvp[]>;
+  createRsvp(rsvp: InsertRsvp): Promise<Rsvp>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private rsvps: Map<string, Rsvp>;
 
   constructor() {
-    this.users = new Map();
+    this.rsvps = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getRsvp(id: string): Promise<Rsvp | undefined> {
+    return this.rsvps.get(id);
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getAllRsvps(): Promise<Rsvp[]> {
+    return Array.from(this.rsvps.values());
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createRsvp(insertRsvp: InsertRsvp): Promise<Rsvp> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const rsvp: Rsvp = { 
+      ...insertRsvp, 
+      id,
+      phone: insertRsvp.phone ?? null,
+      numberOfGuests: insertRsvp.numberOfGuests ?? 1,
+      dietaryPreferences: insertRsvp.dietaryPreferences ?? null,
+      message: insertRsvp.message ?? null,
+    };
+    this.rsvps.set(id, rsvp);
+    return rsvp;
   }
 }
 
