@@ -3,7 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import mandalaPattern from '@assets/generated_images/Gold_mandala_pattern_decoration_04e984cb.png';
-import luxuryPattern from '@assets/generated_images/Luxurious_paisley_pattern_background_4fa0d10f.png';
+import invitationBg from '@assets/generated_images/invitation_bg.png';
 
 export default function InvitationCard() {
   const ref = useRef(null);
@@ -14,27 +14,28 @@ export default function InvitationCard() {
       ref={ref} 
       className="py-20 md:py-32 px-6 relative overflow-hidden"
     >
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{ backgroundImage: `url(${luxuryPattern})`, backgroundSize: '400px' }}
-      />
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, rotateY: -15 }}
           animate={isInView ? { opacity: 1, rotateY: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-8 md:p-16 relative overflow-hidden shadow-2xl border-4 border-primary/20 bg-card/95 backdrop-blur-sm">
+          <Card className="relative overflow-hidden shadow-2xl border-4 border-primary/30" style={{ aspectRatio: '3/4' }}>
+            {/* Background Image */}
             <div 
-              className="absolute top-0 left-0 w-32 h-32 opacity-10"
-              style={{ backgroundImage: `url(${mandalaPattern})`, backgroundSize: 'cover' }}
-            />
-            <div 
-              className="absolute bottom-0 right-0 w-32 h-32 opacity-10 rotate-180"
-              style={{ backgroundImage: `url(${mandalaPattern})`, backgroundSize: 'cover' }}
+              className="absolute inset-0 z-0"
+              style={{ 
+                backgroundImage: `url(${invitationBg})`, 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
             />
             
-            <div className="relative z-10 text-center">
+            {/* Optional overlay for better text readability */}
+            <div className="absolute inset-0 bg-background/5 z-0" />
+            
+            <div className="relative z-10 text-center p-8 md:p-16 h-full flex flex-col justify-center">
               <div className="mb-8">
                 <div className="w-16 h-1 bg-primary mx-auto mb-6 rounded-full" />
                 <img 
@@ -49,11 +50,11 @@ export default function InvitationCard() {
                 Together with their families
               </p>
 
-              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-2">
+              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-2 drop-shadow-sm">
                 Sameer
               </h2>
-              <p className="text-3xl md:text-5xl text-primary font-serif mb-2">&</p>
-              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-8">
+              <p className="text-3xl md:text-5xl text-primary font-serif mb-2 drop-shadow-sm">&</p>
+              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-8 drop-shadow-sm">
                 Purva
               </h2>
 

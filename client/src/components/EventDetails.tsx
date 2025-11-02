@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import borderImage from '@assets/generated_images/border_image.png';
 
 interface EventDetail {
   icon: typeof Calendar;
@@ -95,6 +96,54 @@ export default function EventDetails() {
             const Icon = detail.icon;
             const CardContent = (
               <>
+                {/* Top-right corner */}
+                <div 
+                  className="absolute -top-1 -right-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+                  style={{ 
+                    backgroundImage: `url(${borderImage})`, 
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                    opacity: 1
+                  }}
+                />
+                {/* Top-left corner */}
+                <div 
+                  className="absolute -top-1 -left-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+                  style={{ 
+                    backgroundImage: `url(${borderImage})`, 
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    transform: 'scaleX(-1)',
+                    filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                    opacity: 1
+                  }}
+                />
+                {/* Bottom-right corner */}
+                <div 
+                  className="absolute -bottom-1 -right-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+                  style={{ 
+                    backgroundImage: `url(${borderImage})`, 
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    transform: 'scaleY(-1)',
+                    filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                    opacity: 1
+                  }}
+                />
+                {/* Bottom-left corner */}
+                <div 
+                  className="absolute -bottom-1 -left-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+                  style={{ 
+                    backgroundImage: `url(${borderImage})`, 
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    transform: 'rotate(180deg)',
+                    filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                    opacity: 1
+                  }}
+                />
+                
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
                   <Icon className="w-8 h-8 text-primary" />
                 </div>
@@ -125,7 +174,7 @@ export default function EventDetails() {
                     rel="noopener noreferrer"
                     className="block h-full"
                   >
-                    <Card className="p-8 text-center hover-elevate h-full cursor-pointer transition-transform hover:scale-105">
+                    <Card className="p-8 text-center hover-elevate h-full cursor-pointer transition-transform hover:scale-105 relative overflow-visible bg-card border-2 border-primary/20">
                       {CardContent}
                     </Card>
                   </a>
@@ -134,12 +183,12 @@ export default function EventDetails() {
                     onClick={detail.onClick}
                     className="block cursor-pointer h-full"
                   >
-                    <Card className="p-8 text-center hover-elevate h-full transition-transform hover:scale-105">
+                    <Card className="p-8 text-center hover-elevate h-full transition-transform hover:scale-105 relative overflow-visible bg-card border-2 border-primary/20">
                       {CardContent}
                     </Card>
                   </div>
                 ) : (
-                  <Card className="p-8 text-center hover-elevate h-full">
+                  <Card className="p-8 text-center hover-elevate h-full relative overflow-visible bg-card border-2 border-primary/20">
                     {CardContent}
                   </Card>
                 )}
@@ -154,7 +203,55 @@ export default function EventDetails() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <Card className="p-6 bg-accent/10 border-accent/20">
+          <Card className="p-6 bg-card border-2 border-primary/20 relative overflow-visible">
+            {/* Top-right corner */}
+            <div 
+              className="absolute -top-1 -right-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+              style={{ 
+                backgroundImage: `url(${borderImage})`, 
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                opacity: 1
+              }}
+            />
+            {/* Top-left corner */}
+            <div 
+              className="absolute -top-1 -left-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+              style={{ 
+                backgroundImage: `url(${borderImage})`, 
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                transform: 'scaleX(-1)',
+                filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                opacity: 1
+              }}
+            />
+            {/* Bottom-right corner */}
+            <div 
+              className="absolute -bottom-1 -right-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+              style={{ 
+                backgroundImage: `url(${borderImage})`, 
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                transform: 'scaleY(-1)',
+                filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                opacity: 1
+              }}
+            />
+            {/* Bottom-left corner */}
+            <div 
+              className="absolute -bottom-1 -left-1 w-16 h-16 md:w-20 md:h-20 pointer-events-none z-20"
+              style={{ 
+                backgroundImage: `url(${borderImage})`, 
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                transform: 'rotate(180deg)',
+                filter: 'brightness(1.4) saturate(2.5) contrast(1.4) sepia(1) hue-rotate(-25deg)',
+                opacity: 1
+              }}
+            />
+            
             <p className="text-foreground font-medium mb-2">Dress Code</p>
             <p className="text-muted-foreground">
               Traditional Indian Attire - Sarees, Lehengas, Kurtas, Sherwanis

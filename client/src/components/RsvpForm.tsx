@@ -66,7 +66,7 @@ export default function RsvpForm() {
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-4" />
           <p className="text-muted-foreground text-lg">
-            Kindly respond by December 10th, 2024
+            Kindly respond by December 10th, 2025
           </p>
         </motion.div>
 

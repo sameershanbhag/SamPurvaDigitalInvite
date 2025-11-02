@@ -14,12 +14,12 @@ export default function Footer() {
             With Love and Blessings
           </p>
           <p className="text-muted-foreground">
-            From the families of Sameer & Purva
+            From Joshi and Shanbhag Family
           </p>
         </div>
         
         <div className="text-sm text-muted-foreground">
-          <p>&copy; 2024 Sameer & Purva Engagement Celebration</p>
+          <p>&copy; 2025 Sameer & Purva Engagement Celebration</p>
         </div>
       </div>
     </footer>
