@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import ganeshImage from '@assets/generated_images/Ganesh_blessing_illustration_1c1e100a.png';
-import heroBackground from '@assets/generated_images/Indian_engagement_ceremony_background_3fda4b04.png';
+import heroBackground from '@assets/generated_images/Magical_wedding_venue_background_1200916b.png';
 
 export default function HeroSection() {
   const [showContent, setShowContent] = useState(false);
@@ -18,7 +18,7 @@ export default function HeroSection() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroBackground})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
       
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.div

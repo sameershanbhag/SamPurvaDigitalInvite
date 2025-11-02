@@ -3,20 +3,28 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import mandalaPattern from '@assets/generated_images/Gold_mandala_pattern_decoration_04e984cb.png';
+import luxuryPattern from '@assets/generated_images/Luxurious_paisley_pattern_background_4fa0d10f.png';
 
 export default function InvitationCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="py-20 md:py-32 px-6 bg-background">
-      <div className="max-w-4xl mx-auto">
+    <section 
+      ref={ref} 
+      className="py-20 md:py-32 px-6 relative overflow-hidden"
+    >
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{ backgroundImage: `url(${luxuryPattern})`, backgroundSize: '400px' }}
+      />
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, rotateY: -15 }}
           animate={isInView ? { opacity: 1, rotateY: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-8 md:p-16 relative overflow-hidden shadow-2xl border-4 border-primary/20">
+          <Card className="p-8 md:p-16 relative overflow-hidden shadow-2xl border-4 border-primary/20 bg-card/95 backdrop-blur-sm">
             <div 
               className="absolute top-0 left-0 w-32 h-32 opacity-10"
               style={{ backgroundImage: `url(${mandalaPattern})`, backgroundSize: 'cover' }}
