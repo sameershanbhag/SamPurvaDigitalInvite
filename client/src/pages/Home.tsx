@@ -1,5 +1,4 @@
 import HeroSection from '@/components/HeroSection';
-import EngagementAnimation from '@/components/EngagementAnimation';
 import InvitationCard from '@/components/InvitationCard';
 import EventDetails from '@/components/EventDetails';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -12,7 +11,6 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <EngagementAnimation />
       <InvitationCard />
       <EventDetails />
       <CountdownTimer />
