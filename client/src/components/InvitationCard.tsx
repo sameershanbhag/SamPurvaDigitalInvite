@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Card } from '@/components/ui/card';
-import mandalaPattern from '@assets/generated_images/Gold_mandala_pattern_decoration_04e984cb.png';
 import invitationBg from '@assets/generated_images/invitation_bg.png';
 
 export default function InvitationCard() {
@@ -14,69 +13,90 @@ export default function InvitationCard() {
       ref={ref} 
       className="py-20 md:py-32 px-6 relative overflow-hidden"
     >
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-fit mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, rotateY: -15 }}
           animate={isInView ? { opacity: 1, rotateY: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <Card className="relative overflow-hidden shadow-2xl border-4 border-primary/30" style={{ aspectRatio: '3/4' }}>
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 z-0"
-              style={{ 
-                backgroundImage: `url(${invitationBg})`, 
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-              }}
+          <Card className="relative overflow-hidden shadow-2xl border-4 border-primary/30 p-0">
+            {/* Background Image at original size */}
+            <img 
+              src={invitationBg}
+              alt="Wedding Invitation"
+              className="w-full h-auto"
             />
             
-            {/* Optional overlay for better text readability */}
-            <div className="absolute inset-0 bg-background/5 z-0" />
-            
-            <div className="relative z-10 text-center p-8 md:p-16 h-full flex flex-col justify-center">
-              <div className="mb-8">
-                <div className="w-16 h-1 bg-primary mx-auto mb-6 rounded-full" />
-                <img 
-                  src={mandalaPattern} 
-                  alt="Decorative Mandala" 
-                  className="w-20 h-20 mx-auto opacity-60"
-                />
-                <div className="w-16 h-1 bg-primary mx-auto mt-6 rounded-full" />
-              </div>
+            {/* Overlay content */}
+            <div className="absolute inset-0 z-10 flex flex-col">
+              {/* Semi-transparent overlay for top section */}
+              <div className="absolute inset-x-0 top-0 h-2/3 bg-gradient-to-b from-background/15 via-background/5 to-transparent z-0" />
+              
+              {/* Content in upper portion - avoiding the couple illustration */}
+              <div className="flex-1 flex flex-col justify-start pt-44 md:pt-48 px-6 md:px-10 text-center max-w-xl mx-auto relative z-10">
+                {/* Decorative top flourish */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <div className="h-0.5 w-12 bg-gradient-to-r from-transparent via-primary to-primary" />
+                    <div className="w-2.5 h-2.5 rotate-45 bg-primary border-2 border-primary" />
+                    <div className="h-0.5 w-12 bg-gradient-to-l from-transparent via-primary to-primary" />
+                  </div>
+                </div>
 
-              <p className="text-muted-foreground text-base md:text-lg mb-6 font-sans">
-                Together with their families
-              </p>
+                <p className="text-foreground/70 text-xs md:text-sm mb-6 font-sans tracking-[0.2em] uppercase">
+                  Together with their families
+                </p>
 
-              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-2 drop-shadow-sm">
-                Sameer
-              </h2>
-              <p className="text-3xl md:text-5xl text-primary font-serif mb-2 drop-shadow-sm">&</p>
-              <h2 className="font-serif text-4xl md:text-6xl text-foreground mb-8 drop-shadow-sm">
-                Purva
-              </h2>
+                <div className="mb-6">
+                  <h2 className="font-serif text-5xl md:text-7xl text-foreground mb-2 drop-shadow-lg tracking-wider leading-none font-bold">
+                    Sameer
+                  </h2>
+                  <div className="my-3">
+                    <p className="text-4xl md:text-6xl text-primary font-script drop-shadow-lg">
+                      &
+                    </p>
+                  </div>
+                  <h2 className="font-serif text-5xl md:text-7xl text-foreground drop-shadow-lg tracking-wider leading-none font-bold">
+                    Purva
+                  </h2>
+                </div>
 
-              <div className="my-8">
-                <div className="flex items-center justify-center gap-2">
-                  <div className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/50" />
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <div className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/50" />
+                {/* Elegant divider */}
+                <div className="my-5">
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="h-px w-20 md:w-24 bg-gradient-to-r from-transparent to-primary" />
+                    <div className="flex gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    </div>
+                    <div className="h-px w-20 md:w-24 bg-gradient-to-l from-transparent to-primary" />
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-5">
+                  <p className="text-base md:text-xl font-serif text-foreground drop-shadow-lg tracking-wide leading-relaxed font-semibold">
+                    Request the honor of your presence
+                  </p>
+                  <p className="text-sm md:text-lg text-foreground/85 font-sans tracking-wide drop-shadow-md font-medium">
+                    at the celebration of their
+                  </p>
+                  <p className="text-2xl md:text-3xl text-primary font-serif font-bold drop-shadow-lg tracking-wide">
+                    Engagement
+                  </p>
+                </div>
+
+                <div className="mt-4 mb-8">
+                  <div className="inline-block px-6 py-3 border-t-2 border-b-2 border-primary/80 bg-primary/5 rounded-sm">
+                    <p className="text-primary font-serif text-base md:text-lg font-bold tracking-[0.15em] drop-shadow-md">
+                      Love • Joy • Prosperity
+                    </p>
+                  </div>
                 </div>
               </div>
-
-              <p className="text-lg md:text-2xl font-serif text-foreground mb-6">
-                Request the honor of your presence
-              </p>
-              <p className="text-base md:text-xl text-muted-foreground font-sans mb-8">
-                at the celebration of their Engagement
-              </p>
-
-              <div className="space-y-2 text-muted-foreground text-sm md:text-base">
-                <p>May this union be blessed with</p>
-                <p className="text-primary font-serif text-lg">Love • Joy • Prosperity</p>
-              </div>
+              
+              {/* Space for couple illustration at bottom - increased for taller card */}
+              <div className="h-96 md:h-[28rem]" />
             </div>
           </Card>
         </motion.div>
