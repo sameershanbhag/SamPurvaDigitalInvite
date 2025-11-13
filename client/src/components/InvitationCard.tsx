@@ -10,6 +10,7 @@ export default function InvitationCard() {
 
   return (
     <section 
+      id="invitation-card"
       ref={ref} 
       className="py-20 md:py-32 px-6 relative overflow-hidden"
     >
@@ -33,65 +34,57 @@ export default function InvitationCard() {
               <div className="absolute inset-x-0 top-0 h-2/3 bg-gradient-to-b from-background/15 via-background/5 to-transparent z-0" />
               
               {/* Content in upper portion - avoiding the couple illustration */}
-              <div className="flex-1 flex flex-col justify-start pt-44 md:pt-48 px-6 md:px-10 text-center max-w-xl mx-auto relative z-10">
+              <div className="flex-1 flex flex-col justify-start pt-20 sm:pt-24 md:pt-48 px-4 md:px-10 text-center max-w-xl mx-auto relative z-10">
                 {/* Decorative top flourish */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    <div className="h-0.5 w-12 bg-gradient-to-r from-transparent via-primary to-primary" />
-                    <div className="w-2.5 h-2.5 rotate-45 bg-primary border-2 border-primary" />
-                    <div className="h-0.5 w-12 bg-gradient-to-l from-transparent via-primary to-primary" />
+                <div className="mb-1.5 md:mb-6">
+                  <div className="flex items-center justify-center gap-1.5 md:gap-2 mb-1 md:mb-3">
+                    <div className="h-0.5 w-6 md:w-12 bg-gradient-to-r from-transparent via-primary to-primary" />
+                    <div className="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rotate-45 bg-primary border-2 border-primary" />
+                    <div className="h-0.5 w-6 md:w-12 bg-gradient-to-l from-transparent via-primary to-primary" />
                   </div>
                 </div>
 
-                <p className="text-foreground/70 text-xs md:text-sm mb-6 font-sans tracking-[0.2em] uppercase">
-                  Together with their families
+                <p className="text-foreground/70 text-[9px] md:text-sm mb-1.5 md:mb-6 font-sans tracking-[0.2em] uppercase">
+                  With love and blessings
                 </p>
 
-                <div className="mb-6">
-                  <h2 className="font-serif text-5xl md:text-7xl text-foreground mb-2 drop-shadow-lg tracking-wider leading-none font-bold">
+                <div className="mb-2 md:mb-6">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground mb-0.5 md:mb-2 drop-shadow-lg tracking-wider leading-none font-bold">
                     Sameer
                   </h2>
-                  <div className="my-3">
-                    <p className="text-4xl md:text-6xl text-primary font-script drop-shadow-lg">
+                  <div className="my-0.5 md:my-3">
+                    <p className="text-xl sm:text-2xl md:text-6xl text-primary font-script drop-shadow-lg">
                       &
                     </p>
                   </div>
-                  <h2 className="font-serif text-5xl md:text-7xl text-foreground drop-shadow-lg tracking-wider leading-none font-bold">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground drop-shadow-lg tracking-wider leading-none font-bold">
                     Purva
                   </h2>
                 </div>
 
                 {/* Elegant divider */}
-                <div className="my-5">
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="h-px w-20 md:w-24 bg-gradient-to-r from-transparent to-primary" />
-                    <div className="flex gap-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <div className="my-2 md:my-5">
+                  <div className="flex items-center justify-center gap-2 md:gap-3">
+                    <div className="h-px w-10 md:w-24 bg-gradient-to-r from-transparent to-primary" />
+                    <div className="flex gap-1 md:gap-1.5">
+                      <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary" />
+                      <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary/60" />
+                      <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary" />
                     </div>
-                    <div className="h-px w-20 md:w-24 bg-gradient-to-l from-transparent to-primary" />
+                    <div className="h-px w-10 md:w-24 bg-gradient-to-l from-transparent to-primary" />
                   </div>
                 </div>
 
-                <div className="space-y-2 mb-5">
-                  <p className="text-base md:text-xl font-serif text-foreground drop-shadow-lg tracking-wide leading-relaxed font-semibold">
+                <div className="space-y-0.5 md:space-y-2 mb-2 md:mb-5">
+                  <p className="text-[11px] sm:text-xs md:text-xl font-serif text-foreground drop-shadow-lg tracking-wide leading-tight md:leading-relaxed font-semibold">
                     Request the honor of your presence
                   </p>
-                  <p className="text-sm md:text-lg text-foreground/85 font-sans tracking-wide drop-shadow-md font-medium">
+                  <p className="text-[9px] sm:text-[10px] md:text-lg text-foreground/85 font-sans tracking-wide drop-shadow-md font-medium">
                     at the celebration of their
                   </p>
-                  <p className="text-2xl md:text-3xl text-primary font-serif font-bold drop-shadow-lg tracking-wide">
+                  <p className="text-base sm:text-lg md:text-3xl text-primary font-serif font-bold drop-shadow-lg tracking-wide">
                     Engagement
                   </p>
-                </div>
-
-                <div className="mt-4 mb-8">
-                  <div className="inline-block px-6 py-3 border-t-2 border-b-2 border-primary/80 bg-primary/5 rounded-sm">
-                    <p className="text-primary font-serif text-base md:text-lg font-bold tracking-[0.15em] drop-shadow-md">
-                      Love • Joy • Prosperity
-                    </p>
-                  </div>
                 </div>
               </div>
               

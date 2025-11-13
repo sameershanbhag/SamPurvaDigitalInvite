@@ -39,30 +39,37 @@ export default function HeroSection() {
           animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 20 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <p className="text-primary font-serif text-xl md:text-2xl mb-4 tracking-wide">
-            Together with their families
+          <p className="text-primary font-script text-3xl md:text-4xl mb-6 tracking-wide">
+            Two Hearts, One Journey
           </p>
           
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-4">
-            Sameer <span className="text-primary">&</span> Purva
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight">
+            The <span className="text-primary">Engagement</span>
           </h1>
           
-          <div className="w-32 h-1 bg-primary mx-auto my-6 rounded-full" />
-          
-          <p className="text-white text-xl md:text-3xl font-serif mb-8">
-            Request the pleasure of your company
+          <p className="text-white/90 font-sans text-lg md:text-xl tracking-wider mt-8">
+            Join us as we begin our forever
           </p>
           
-          <p className="text-white/90 text-lg md:text-xl mb-4">
-            at their Engagement Celebration
-          </p>
+          <div className="w-32 h-1 bg-primary mx-auto my-10 rounded-full" />
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: showContent ? 1 : 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer hover:scale-110 transition-transform duration-300"
+          onClick={() => {
+            const invitationSection = document.querySelector('#invitation-card');
+            if (invitationSection) {
+              invitationSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }}
+          role="button"
+          aria-label="Scroll to invitation"
         >
           <ChevronDown className="w-8 h-8 text-primary animate-bounce" />
         </motion.div>

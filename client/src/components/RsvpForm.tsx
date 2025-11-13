@@ -32,24 +32,42 @@ export default function RsvpForm() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log('RSVP submitted:', formData);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "RSVP Received!",
-      description: "Thank you for confirming your attendance. We look forward to celebrating with you!",
-    });
-    
-    setFormData({
-      guestName: '',
-      phone: '',
-      attending: 'yes',
-      numberOfGuests: '1',
-      message: '',
-    });
-    
-    setIsSubmitting(false);
+    try {
+      const response = await fetch('/api/rsvp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit RSVP');
+      }
+
+      toast({
+        title: "RSVP Received!",
+        description: "Thank you for confirming your attendance. We look forward to celebrating with you!",
+      });
+      
+      // Reset form
+      setFormData({
+        guestName: '',
+        phone: '',
+        attending: 'yes',
+        numberOfGuests: '1',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit RSVP. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
