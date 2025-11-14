@@ -35,9 +35,7 @@ export default function MusicToggle() {
         loop
         preload="auto"
       >
-        {/* Replace with your actual music file path */}
-        <source src="/wedding-music.mp3" type="audio/mpeg" />
-        <source src="/wedding-music.ogg" type="audio/ogg" />
+        <source src="/sounds/Ishq Hai.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
 
