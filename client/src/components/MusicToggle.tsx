@@ -20,15 +20,25 @@ export default function MusicToggle() {
     }
   };
 
-  // Auto-play on mount
+  // Auto-play on mount and on first user interaction
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.3; // Set volume to 30%
-      // Try to auto-play
-      audioRef.current.play().catch(error => {
-        console.log('Autoplay prevented by browser:', error);
-        setIsPlaying(false); // Update state if autoplay fails
-      });
+    }
+    
+    // Listen for play/pause events to keep state in sync
+    const audio = audioRef.current;
+    if (audio) {
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+      
+      audio.addEventListener('play', handlePlay);
+      audio.addEventListener('pause', handlePause);
+      
+      return () => {
+        audio.removeEventListener('play', handlePlay);
+        audio.removeEventListener('pause', handlePause);
+      };
     }
   }, []);
 
@@ -39,6 +49,8 @@ export default function MusicToggle() {
         ref={audioRef}
         loop
         preload="auto"
+        autoPlay
+        muted={false}
       >
         <source src="/sounds/Ishq Hai.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
