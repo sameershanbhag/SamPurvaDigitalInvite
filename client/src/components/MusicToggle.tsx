@@ -4,48 +4,63 @@ import { Volume2, VolumeX } from 'lucide-react';
 
 export default function MusicToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [userInteracted, setUserInteracted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Handle first user interaction to start audio
   useEffect(() => {
-    const startAudio = () => {
-      if (!userInteracted && audioRef.current) {
-        setUserInteracted(true);
-        audioRef.current.muted = false;
-        audioRef.current.play()
-          .then(() => setIsPlaying(true))
-          .catch(error => console.error('Autoplay failed:', error));
+    const startAudio = async () => {
+      if (!hasInteracted && audioRef.current) {
+        setHasInteracted(true);
+        
+        try {
+          // Unmute the audio
+          audioRef.current.muted = false;
+          audioRef.current.volume = 0.3;
+          
+          // Try to play
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error('Autoplay failed:', error);
+          setIsPlaying(false);
+        }
       }
     };
 
-    // Listen for any click on the page to start audio
-    document.addEventListener('click', startAudio, { once: true });
-    document.addEventListener('touchstart', startAudio, { once: true });
+    // Listen for various user interactions
+    const events = ['click', 'touchstart', 'touchend', 'scroll'];
+    events.forEach(event => {
+      document.addEventListener(event, startAudio, { once: true, passive: true });
+    });
 
     return () => {
-      document.removeEventListener('click', startAudio);
-      document.removeEventListener('touchstart', startAudio);
+      events.forEach(event => {
+        document.removeEventListener(event, startAudio);
+      });
     };
-  }, [userInteracted]);
+  }, [hasInteracted]);
 
-  // Set initial audio properties
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.3;
-    }
-  }, []);
-
-  const toggleMusic = () => {
+  const toggleMusic = async () => {
     if (!audioRef.current) return;
 
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(error => console.error('Play failed:', error));
+    // Ensure we mark as interacted
+    if (!hasInteracted) {
+      setHasInteracted(true);
+      audioRef.current.muted = false;
+      audioRef.current.volume = 0.3;
+    }
+
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        await audioRef.current.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error('Play/Pause failed:', error);
     }
   };
 
@@ -55,7 +70,8 @@ export default function MusicToggle() {
         ref={audioRef}
         loop
         preload="auto"
-        autoPlay
+        playsInline
+        muted
       >
         <source src="/sounds/ishq_hai_final.mp3" type="audio/mpeg" />
       </audio>
