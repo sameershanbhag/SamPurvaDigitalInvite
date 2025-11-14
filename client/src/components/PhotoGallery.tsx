@@ -2,7 +2,7 @@ import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { X, Heart } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 export default function PhotoGallery() {
@@ -10,10 +10,11 @@ export default function PhotoGallery() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const placeholderPhotos = Array.from({ length: 6 }, (_, i) => ({
-    id: i + 1,
-    color: i % 3 === 0 ? 'bg-primary/20' : i % 3 === 1 ? 'bg-secondary/20' : 'bg-accent/20',
-  }));
+  const photos = [
+    { id: 1, src: '/memories/photo1.jpg', alt: 'Sameer and Purva - Memory 1' },
+    { id: 2, src: '/memories/photo2.jpg', alt: 'Sameer and Purva - Memory 2' },
+    { id: 3, src: '/memories/photo3.jpg', alt: 'Sameer and Purva - Memory 3' },
+  ];
 
   return (
     <section ref={ref} className="py-20 md:py-32 px-6 bg-card">
@@ -34,7 +35,7 @@ export default function PhotoGallery() {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {placeholderPhotos.map((photo, index) => (
+          {photos.map((photo, index) => (
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -42,14 +43,16 @@ export default function PhotoGallery() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card 
-                className={`aspect-square ${photo.color} hover-elevate active-elevate-2 cursor-pointer overflow-hidden relative group`}
+                className="aspect-square hover-elevate active-elevate-2 cursor-pointer overflow-hidden relative group"
                 onClick={() => setSelectedImage(index)}
                 data-testid={`gallery-photo-${photo.id}`}
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Heart className="w-12 h-12 text-foreground/20" />
-                </div>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <img 
+                  src={photo.src} 
+                  alt={photo.alt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <p className="text-white text-sm font-medium">View Photo</p>
                 </div>
               </Card>
@@ -61,14 +64,18 @@ export default function PhotoGallery() {
           <DialogContent className="max-w-4xl">
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-background/80 hover-elevate"
+              className="absolute top-4 right-4 p-2 rounded-full bg-background/80 hover-elevate z-10"
               data-testid="button-close-photo"
             >
               <X className="w-6 h-6" />
             </button>
             {selectedImage !== null && (
-              <div className={`aspect-video ${placeholderPhotos[selectedImage].color} rounded-lg flex items-center justify-center`}>
-                <Heart className="w-24 h-24 text-foreground/20" />
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <img 
+                  src={photos[selectedImage].src} 
+                  alt={photos[selectedImage].alt}
+                  className="w-full h-full object-cover"
+                />
               </div>
             )}
           </DialogContent>
