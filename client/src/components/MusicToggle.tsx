@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export default function MusicToggle() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Toggle play/pause
@@ -20,10 +20,15 @@ export default function MusicToggle() {
     }
   };
 
-  // Auto-play on mount (with user interaction requirement)
+  // Auto-play on mount
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.3; // Set volume to 30%
+      // Try to auto-play
+      audioRef.current.play().catch(error => {
+        console.log('Autoplay prevented by browser:', error);
+        setIsPlaying(false); // Update state if autoplay fails
+      });
     }
   }, []);
 
