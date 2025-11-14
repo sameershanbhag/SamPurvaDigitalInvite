@@ -1,14 +1,11 @@
 import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { X } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { useRef } from 'react';
 
 export default function PhotoGallery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const photos = [
     { id: 1, src: '/memories/photo1.jpg', alt: 'Sameer and Purva - Memory 1' },
@@ -43,8 +40,7 @@ export default function PhotoGallery() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card 
-                className="aspect-square hover-elevate active-elevate-2 cursor-pointer overflow-hidden relative group"
-                onClick={() => setSelectedImage(index)}
+                className="aspect-square overflow-hidden relative group"
                 data-testid={`gallery-photo-${photo.id}`}
               >
                 <img 
@@ -52,34 +48,10 @@ export default function PhotoGallery() {
                   alt={photo.alt}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <p className="text-white text-sm font-medium">View Photo</p>
-                </div>
               </Card>
             </motion.div>
           ))}
         </div>
-
-        <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="max-w-4xl">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-background/80 hover-elevate z-10"
-              data-testid="button-close-photo"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            {selectedImage !== null && (
-              <div className="aspect-video rounded-lg overflow-hidden">
-                <img 
-                  src={photos[selectedImage].src} 
-                  alt={photos[selectedImage].alt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
-          </DialogContent>
-        </Dialog>
       </div>
     </section>
   );
