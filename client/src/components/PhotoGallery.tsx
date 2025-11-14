@@ -11,6 +11,9 @@ export default function PhotoGallery() {
     { id: 1, src: '/memories/photo1.jpg', alt: 'Sameer and Purva - Memory 1' },
     { id: 2, src: '/memories/photo2.jpg', alt: 'Sameer and Purva - Memory 2' },
     { id: 3, src: '/memories/photo3.jpg', alt: 'Sameer and Purva - Memory 3' },
+    { id: 4, src: '/memories/photo4.jpg', alt: 'Sameer and Purva - Memory 4' },
+    { id: 5, src: '/memories/photo5.jpg', alt: 'Sameer and Purva - Memory 5' },
+    { id: 6, src: '/memories/photo6.jpg', alt: 'Sameer and Purva - Memory 6' },
   ];
 
   return (
