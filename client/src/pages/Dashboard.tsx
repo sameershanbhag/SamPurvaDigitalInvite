@@ -9,12 +9,10 @@ import { LogOut, Users, UserCheck, UserX } from 'lucide-react';
 
 interface RSVP {
   _id: string;
-  name: string;
-  email: string;
+  guestName: string;
   phone: string;
   attending: boolean;
   numberOfGuests: number;
-  dietaryRestrictions?: string;
   message?: string;
   createdAt: string;
 }
@@ -145,19 +143,18 @@ function DashboardContent({ onLogout }: { onLogout: () => void }) {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left py-3 px-4 font-semibold">Name</th>
-                      <th className="text-left py-3 px-4 font-semibold">Email</th>
+                      <th className="text-left py-3 px-4 font-semibold">Guest Name</th>
                       <th className="text-left py-3 px-4 font-semibold">Phone</th>
                       <th className="text-left py-3 px-4 font-semibold">Status</th>
                       <th className="text-left py-3 px-4 font-semibold">Guests</th>
+                      <th className="text-left py-3 px-4 font-semibold">Message</th>
                       <th className="text-left py-3 px-4 font-semibold">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {rsvps.map((rsvp) => (
                       <tr key={rsvp._id} className="border-b hover:bg-muted/50">
-                        <td className="py-3 px-4">{rsvp.name}</td>
-                        <td className="py-3 px-4 text-sm">{rsvp.email}</td>
+                        <td className="py-3 px-4">{rsvp.guestName}</td>
                         <td className="py-3 px-4 text-sm">{rsvp.phone}</td>
                         <td className="py-3 px-4">
                           <span
@@ -171,6 +168,7 @@ function DashboardContent({ onLogout }: { onLogout: () => void }) {
                           </span>
                         </td>
                         <td className="py-3 px-4">{rsvp.attending ? rsvp.numberOfGuests : '-'}</td>
+                        <td className="py-3 px-4 text-sm max-w-xs truncate">{rsvp.message || '-'}</td>
                         <td className="py-3 px-4 text-sm text-muted-foreground">
                           {new Date(rsvp.createdAt).toLocaleDateString()}
                         </td>
