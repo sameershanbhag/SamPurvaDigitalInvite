@@ -44,20 +44,20 @@ export default function InvitationCard() {
                   </div>
                 </div>
 
-                <p className="text-foreground/80 text-[10px] md:text-base mb-1.5 md:mb-6 font-sans tracking-[0.2em] uppercase font-semibold">
+                <p className="text-[9px] sm:text-[10px] md:text-lg text-foreground/80 font-sans tracking-[0.2em] uppercase font-semibold mb-1.5 md:mb-6">
                   With love and blessings
                 </p>
 
                 <div className="mb-2 md:mb-6">
-                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground mb-0.5 md:mb-2 drop-shadow-lg tracking-wider leading-none font-bold">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground mb-1 md:mb-3 drop-shadow-lg tracking-wider leading-none font-bold">
                     Sameer
                   </h2>
-                  <div className="my-0.5 md:my-3">
-                    <p className="text-xl sm:text-2xl md:text-6xl text-primary font-script drop-shadow-lg font-bold">
+                  <div className="my-1 md:my-3">
+                    <p className="text-xl sm:text-2xl md:text-6xl text-primary font-script font-bold">
                       &
                     </p>
                   </div>
-                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground drop-shadow-lg tracking-wider leading-none font-bold">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-7xl text-foreground mt-1 md:mt-3 drop-shadow-lg tracking-wider leading-none font-bold">
                     Purva
                   </h2>
                 </div>
@@ -82,7 +82,7 @@ export default function InvitationCard() {
                   <p className="text-[10px] sm:text-xs md:text-xl text-foreground/90 font-sans tracking-wide drop-shadow-md font-semibold">
                     at the celebration of their
                   </p>
-                  <p className="text-lg sm:text-xl md:text-4xl text-primary font-serif font-bold drop-shadow-lg tracking-wide">
+                  <p className="text-lg sm:text-xl md:text-4xl text-primary font-serif font-bold tracking-wide">
                     Engagement
                   </p>
                 </div>
