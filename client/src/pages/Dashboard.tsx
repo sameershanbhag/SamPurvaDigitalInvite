@@ -168,7 +168,7 @@ function DashboardContent({ onLogout }: { onLogout: () => void }) {
                           </span>
                         </td>
                         <td className="py-3 px-4">{rsvp.attending ? rsvp.numberOfGuests : '-'}</td>
-                        <td className="py-3 px-4 text-sm max-w-xs truncate">{rsvp.message || '-'}</td>
+                        <td className="py-3 px-4 text-sm">{rsvp.message || '-'}</td>
                         <td className="py-3 px-4 text-sm text-muted-foreground">
                           {new Date(rsvp.createdAt).toLocaleDateString()}
                         </td>
